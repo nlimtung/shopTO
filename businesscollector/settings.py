@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'businesscollector',
-        'USER': 'postgres',
+        'USER': os.environ['USER'], #'USER': 'postgres',
         'PASSWORD': os.environ['PASSWORD'],
         'HOST': os.environ['HOST'],
         'PORT': os.environ['PORT'],
