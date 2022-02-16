@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>business listings</h1>
+
+{% for business in businesses %}
+  <div class="card">
+    <a href="{% url 'detail' business.id %}">
+        <div class="card-content">
+        <span class="card-title">{{ business.name }}</span>
+        <p>Address: {{ business.address }}</p>
+        <p>City: {{ business.city }}</p>
+        <p>Provice: {{ business.province }}</p>
+        <p>Postal Code: {{ business.postal_code }}</p>
+        <p>Website: {{ business.website }}</p>
+        <p>Category: {{ business.category }}</p>
+
+        </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
