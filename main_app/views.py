@@ -4,12 +4,27 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
 from .models import Business
+
+
+from django.views.generic import CreateView
+
+
+
+
+
 
 # Create your views here.
 def home (request):
     return render (request, 'home.html')
+
+def businesses_index(request):
+    businesses = Business.objects.all()
+    return render(request, 'businesses/index.html', { 'businesses': businesses })
+
+def businesses_detail(request, business_id):
+  business = Business.objects.get(id=business_id)
+  return render(request, 'businesses/detail.html', { 'business': business })
 
 def signup(request):
   error_message = ''
