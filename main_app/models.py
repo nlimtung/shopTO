@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+import django_filters
+
 
 CATEGORY = (
     ('Other', 'Other'),
@@ -25,3 +27,10 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+
+class BusinessFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='iexact')
+
+    class Meta:
+        model = Business
+        fields = ['category']
