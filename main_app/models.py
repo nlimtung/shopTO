@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 
+
 CATEGORY = (
     ('Other', 'Other'),
     ('Home', 'Home'),
@@ -25,3 +26,4 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+

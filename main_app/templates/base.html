@@ -21,14 +21,15 @@
         <a href = "{% url 'business_create' %}">add new</a>
         {% if user.is_authenticated %}
 
-            
-            <div class="dropdown"> categories
+            <a href ="{% url 'category'%}"> categories</a>
+
+            <!-- <div class="dropdown"> categories
                     <div class="dropdown-content">
                         <a href="#">Link 1</a>
                         <a href="#">Link 2</a>
                         <a href="#">Link 3</a>
                     </div>
-            </div>
+            </div> -->
             <a href = ''> favourites?</a>
             <a href = ''> see your </br>business</a>
             <a href = ''>log out</a>
