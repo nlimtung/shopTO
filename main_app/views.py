@@ -61,6 +61,7 @@ class BusinessCreate(CreateView):
 def category(request):
     businesses = Business.objects.all()
     category_filter = BusinessFilter(request.GET, queryset=businesses)
+    
     return render(request, 'category.html', {'businesses': businesses, 'category_filter': category_filter})
 
   
