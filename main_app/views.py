@@ -7,6 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Business
 
 
+from django.views.generic import CreateView
+
+
+
+
 
 
 # Create your views here.
@@ -41,10 +46,15 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 #Create business
-# class CatCreate(LoginRequiredMixin, CreateView):
-# class CatCreate(CreateView):
-#   model = Cat
-#   fields = ['name', 'breed', 'description', 'age']
+
+def business_index(request):
+  return render(request, 'business/index.html', { 'business': business })
+
+
+
+class BusinessCreate(CreateView):
+  model = Business
+  fields = '__all__'
   
 #   # This inherited method is called when a
 #   # valid cat form is being submitted
