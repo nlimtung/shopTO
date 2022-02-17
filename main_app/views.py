@@ -1,3 +1,5 @@
+from dataclasses import fields
+from pyexpat import model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
@@ -9,7 +11,7 @@ from .filter import BusinessFilter
 
 
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 
@@ -57,6 +59,16 @@ def business_index(request):
 class BusinessCreate(CreateView):
   model = Business
   fields = '__all__'
+  success_url = '/businesses/'
+
+class BusinessesUpdate(UpdateView): 
+  model = Business 
+  fields = ['name', 'website', 'description', 'category']
+  success_url = '/businesses/'
+
+class BusinessesDelete(DeleteView):
+  model = Business
+  success_url = '/businesses/'  
 
 def category(request):
     businesses = Business.objects.all()
