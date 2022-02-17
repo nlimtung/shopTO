@@ -7,6 +7,11 @@ CATEGORY = (
     ('Other', 'Other'),
     ('Home', 'Home'),
     ('Books', 'Books'),
+    ('Food', 'Food'),
+    ('Music', 'Music'),
+    ('Jewelry', 'Jewelry'),
+    ('Pets', 'Pets'),
+    ('Stationery', 'Stationery'),
     ('Clothes', 'Clothes')
 )
 
@@ -17,6 +22,7 @@ class Business(models.Model):
     province = models.CharField(max_length = 100)
     postal_code = models.CharField(max_length = 100)
     website = models.URLField(max_length = 200)
+    description = models.CharField(max_length=1000)
     category = models.CharField(
         max_length=10,
         choices=CATEGORY,
