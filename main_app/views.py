@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Business
+from .filter import BusinessFilter
+
 
 
 from django.views.generic import CreateView
@@ -55,6 +57,13 @@ def business_index(request):
 class BusinessCreate(CreateView):
   model = Business
   fields = '__all__'
+
+def category(request):
+    businesses = Business.objects.all()
+    category_filter = BusinessFilter(request.GET, queryset=businesses)
+    
+    return render(request, 'category.html', {'businesses': businesses, 'category_filter': category_filter})
+
   
 #   # This inherited method is called when a
 #   # valid cat form is being submitted

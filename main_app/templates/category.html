@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+ <form method="GET">
+{{category_filter.form.as_p}}
+<button type = 'submit'>search</button>
+ </form>
+
+
+
+
+ 
+
+{% for category in category_filter.qs %}
+<div>
+  {{category.name}}
+  {{category.address}}
+</div>
+
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
