@@ -1,12 +1,19 @@
 body {
     font-family: 'Bentham', serif;
+    background-color: #fo3be1;
+    margin: 0 80px 0 80px
+}
+
+h1 {
+    text-align: center;
 }
 
 /* NAV BAR */
 nav {
     display: flex;
-    background: lightgrey;
+    background-color: #c3c6b1;
     justify-content: flex-end;
+    margin: 0 -80px 0 -80px
 }
 
 nav > h2{
@@ -41,25 +48,44 @@ nav a:hover:after {
     background: black;
 }
 
-nav a:hover, .dropdown:hover{
+nav a:hover {
     color: black
 }
 
-/* NAV BAR - DROPDOWN CATEGORIES */
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-.dropdown-content a{
-    color: lightgrey;
-    font-size: 22px;
+
+.card {
+    position: relative;
+    display: inline-flex;
+    margin: 20px;
+    background-color: #c3c6b1;
+    font-size: 25px;
+    width: 300px;
+    height: 400px
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+.card-content {
+    color: black;
+    text-align: center;
+    align-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-style: solid;
+    width: 300px;
+    padding: 0px
+
+
+}
+
+.card-content:hover {
+    color: white
+}
+
+.card-title {
+    font-size:40px;
+}
+
+p {
+    margin: 15px 0 15px 0
 }
