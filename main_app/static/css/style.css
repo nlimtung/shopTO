@@ -61,7 +61,9 @@ nav a:hover {
     background-color: #c3c6b1;
     font-size: 25px;
     width: 300px;
-    height: 400px
+    height: 400px;
+    background-size: cover;
+    background-position: center;
 }
 
 .card-content {
@@ -71,9 +73,10 @@ nav a:hover {
     position: absolute;
     bottom: 0;
     left: 0;
-    border-style: solid;
     width: 300px;
-    padding: 0px
+    padding: 0px;
+    background-color: #c3c6b1;
+
 
 
 }
@@ -119,3 +122,4 @@ p {
   line-height: 30px;
   
 }
+

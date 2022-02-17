@@ -6,8 +6,15 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+
+
 from .models import Business
 from .filter import BusinessFilter
+import uuid
+import boto3
+S3_BASE_URL = 'http://s3.ca-central-1.amazonaws.com/'
+BUCKET = 'businesscollector'
 
 
 
@@ -55,13 +62,15 @@ def business_index(request):
   return render(request, 'business/index.html', { 'business': business })
 
 
-
 class BusinessCreate(CreateView):
   model = Business
   fields = '__all__'
   success_url = '/businesses/'
 
-class BusinessesUpdate(UpdateView): 
+
+  
+
+class BusinessesUpdate(UpdateView):
   model = Business 
   fields = ['name', 'website', 'description', 'category']
   success_url = '/businesses/'

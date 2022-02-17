@@ -28,6 +28,7 @@ class Business(models.Model):
         choices=CATEGORY,
         default=CATEGORY[0][0]
     )
+    image = models.ImageField(upload_to='businesscollector/',default='default.png',null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
