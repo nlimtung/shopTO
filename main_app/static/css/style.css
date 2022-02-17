@@ -89,3 +89,33 @@ nav a:hover {
 p {
     margin: 15px 0 15px 0
 }
+.delete-form{
+    padding-top: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+.delete-form a {
+    font-size: 20px;
+    color: #95AA63;
+    text-decoration: none;
+}
+.delete-form a:hover{
+    color: #353d23;
+   
+}
+.btn {
+    background-color: white;
+    color: black;
+    border: 2px solid #95AA63;
+    text-align: center;
+    padding: 12px 28px;
+}
+.btn:hover{
+    background-color: #95AA63;
+    padding: 14px 30px;
+}
+
+.createform{
+  line-height: 30px;
+  
+}
