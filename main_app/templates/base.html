@@ -16,25 +16,25 @@
 <body>
     <nav>
         <h2>business collector</h2>
-        <a href = ''>see all</a>
+        <a href = '/businesses'>see all</a>
         <a href = ''>about</a>
-        <a href = "{% url 'business_create' %}">add new</a>
         {% if user.is_authenticated %}
+            <a href = "{% url 'business_create' %}">add new</a>
+            <a href ="{% url 'category'%}"> categories</a>
 
-            
-            <div class="dropdown"> categories
+            <!-- <div class="dropdown"> categories
                     <div class="dropdown-content">
                         <a href="#">Link 1</a>
                         <a href="#">Link 2</a>
                         <a href="#">Link 3</a>
                     </div>
-            </div>
+            </div> -->
             <a href = ''> favourites?</a>
             <a href = ''> see your </br>business</a>
-            <a href = ''>log out</a>
+            <a href = "{% url 'logout' %}">log out</a>
         {% else %}
         <a href="{% url 'signup' %}">sign up</a>
-        <a href = ''>log in</a>
+        <a href ="{% url 'login' %}">log in</a>
         {% endif %}
     </nav>
 
