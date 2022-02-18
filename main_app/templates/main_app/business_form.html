@@ -6,16 +6,18 @@
   {% else %}
     <h1>Add Business</h1>
   {% endif %}
+
+
   <div class="createform">
-  <form action="" method="post">
+  <form action="" method="post" enctype="multipart/form-data">
     
     {% csrf_token %}
     <table>
       
       {{ form.as_table }}
     </table>
-    </form>
   </BR>
+
     <input type="submit" value="Submit!" class="btn">
   </form>
 </div>
