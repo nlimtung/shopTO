@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>my business listings</h1>
+
+<h1>{{User.name}}</h1>
+
+{% for business in businesses %}
+  <div class="card" style="background-image: url({{business.image.url}});">
+    <!-- <img src= "{{business.image.url}}"> -->
+      <a href="{% url 'detail' business.id %}">
+          <div class="card-content">
+          <span class="card-title">{{ business.name }}</span>
+          </br>
+          <p>Category: {{ business.category }}</p>
+
+          </div>
+      </a>
+  </div>
+{% endfor %}
+
+{% endblock %}

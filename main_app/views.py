@@ -93,3 +93,7 @@ def category(request):
 #     form.instance.user = self.request.user  # form.instance is the cat
 #     # Let the CreateView do its job as usual
 #     return super().form_valid(form)
+
+def my_profile(request):
+  businesses = Business.objects.filter(user=request.user)
+  return render(request, 'businesses/profile.html', { 'businesses': businesses})
