@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>business details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ business.name }}</span>
+    <p>Address: {{ business.address }}</p>
+    <p>City: {{ business.city }}</p>
+    <p>Provice: {{ business.province }}</p>
+    <p>Postal Code: {{ business.postal_code }}</p>
+    <p>Website: {{ business.website }}</p>
+    <p>Category: {{ business.category }}</p>
+    <p>Description: {{ business.description }}</p>
+
+
+  </BR>
+    <div class="card-action">
+      <a href="{% url 'businesses_update' business.id %}">Edit</a>
+      <a href="{% url 'businesses_delete' business.id %}">Delete Business</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
