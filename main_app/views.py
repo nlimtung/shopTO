@@ -64,7 +64,7 @@ def business_index(request):
   return render(request, 'business/index.html', { 'business': business })
 
 
-class BusinessCreate(CreateView):
+class BusinessCreate(LoginRequiredMixin, CreateView):
   model = Business
   fields = '__all__'
   success_url = '/businesses/'
@@ -72,12 +72,12 @@ class BusinessCreate(CreateView):
 
   
 
-class BusinessesUpdate(UpdateView):
+class BusinessesUpdate(LoginRequiredMixin, UpdateView):
   model = Business 
   fields = ['name', 'website', 'description', 'category']
   success_url = '/businesses/'
 
-class BusinessesDelete(DeleteView):
+class BusinessesDelete(LoginRequiredMixin, DeleteView):
   model = Business
   success_url = '/businesses/'  
 
@@ -96,6 +96,7 @@ def category(request):
 #     # Let the CreateView do its job as usual
 #     return super().form_valid(form)
 
+@login_required
 def my_profile(request):
   businesses = Business.objects.filter(user=request.user)
   return render(request, 'businesses/profile.html', { 'businesses': businesses})
