@@ -3,18 +3,23 @@
 
 <h1>business listings</h1>
 
-{% for business in businesses %}
-  <div class="card" style="background-image: url({{business.image.url}});">
-    <!-- <img src= "{{business.image.url}}"> -->
-      <a href="{% url 'detail' business.id %}">
+<form method="GET">
+  {{category_filter.form.as_p}}
+  <button type = 'submit'>search</button>
+</form>
+  
+{% for category in category_filter.qs %}
+<a href="{% url 'detail' category.id %}">
+  <div class="card" style="background-image: url({{category.image.url}});">
           <div class="card-content">
-          <span class="card-title">{{ business.name }}</span>
+          <span class="card-title">{{ category.name }}</span>
           </br>
-          <p>Category: {{ business.category }}</p>
+          <p>Category: {{ category.category }}</p>
 
           </div>
-      </a>
   </div>
+</a>
+
 {% endfor %}
 
 {% endblock %}
