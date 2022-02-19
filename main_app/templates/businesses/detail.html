@@ -14,11 +14,16 @@
     {{ business.city }}, {{ business.province }}, {{ business.postal_code }}</p>
     <p> <button><a href ='{{ business.website }}'>shop website</a> </button></p>
      
-    <div class="card-action">
-        <p><button> <a href="{% url 'businesses_update' business.id %}">Edit</a></button>
-          <button><a href="{% url 'businesses_delete' business.id %}">Delete Business</a></button></p>
-      </div>
-  </div>
+    {% if business.user == request.user %}
+
+        <div class="card-action">
+            <p><button> <a href="{% url 'businesses_update' business.id %}">Edit</a></button>
+            <button><a href="{% url 'businesses_delete' business.id %}">Delete Business</a></button></p>
+        </div>
+        </div>
+    {% else %}
+        <div></div>
+    {% endif %}
 </div>
 
 {% endblock %}
