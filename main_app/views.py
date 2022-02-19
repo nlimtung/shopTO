@@ -31,7 +31,9 @@ def home (request):
 
 def businesses_index(request):
     businesses = Business.objects.all()
-    return render(request, 'businesses/index.html', { 'businesses': businesses })
+    category_filter = BusinessFilter(request.GET, queryset=businesses, )
+
+    return render(request, 'businesses/index.html', { 'businesses': businesses, 'category_filter': category_filter })
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)

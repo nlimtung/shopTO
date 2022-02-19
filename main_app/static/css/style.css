@@ -65,6 +65,15 @@ nav a:hover {
     background-size: cover;
     background-position: center;
 }
+.card:hover {
+    opacity: 0.8;
+    cursor: pointer;
+
+}
+
+.card:hover .card-content {
+    color: white
+}
 
 .card-content {
     color: black;
@@ -79,9 +88,8 @@ nav a:hover {
 
 }
 
-.card-content:hover {
-    color: white
-}
+
+
 
 .card-title {
     font-size:40px;
