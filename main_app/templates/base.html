@@ -30,7 +30,7 @@
                     </div>
             </div> -->
             <a href = ''> favourites?</a>
-            <a href = ''> see your </br>business</a>
+            <a href = "{% url 'myprofile' %}"> see your </br>business</a>
             <a href = "{% url 'logout' %}">log out</a>
         {% else %}
         <a href="{% url 'signup' %}">sign up</a>
