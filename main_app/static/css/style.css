@@ -77,8 +77,6 @@ nav a:hover {
     padding: 0px;
     background-color: #c3c6b1;
 
-
-
 }
 
 .card-content:hover {
@@ -122,4 +120,57 @@ p {
   line-height: 30px;
   
 }
+
+/* details page */
+.details-card {
+    display: flex;
+    position:relative;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+} 
+.details-image {
+    width: 400px;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+.details-card-text {
+    background-color: #c3c6b1;
+    border-radius: 5px;
+    width: 370px;
+    height: 500px;
+    font-size: 25px;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.details-card a {
+    text-decoration: none;
+    font-family: 'Bentham', serif;
+    font-size: 20px;
+    color: black
+
+}
+.details-card-text p {
+    padding-top: 5px;
+    padding-left: 30px;
+}
+
+.details-card button {
+    border-radius: 5px;
+}   
+
+.details-card button:hover {
+    border-radius: 5px;
+    background-color: lightgrey;  
+}  
+
+.details-card a:hover {
+    color: white;
+}  
 
