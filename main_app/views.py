@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 from .models import Business
@@ -18,7 +18,6 @@ BUCKET = 'businesscollector'
 
 
 
-from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 
@@ -37,7 +36,11 @@ def businesses_index(request):
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  return render(request, 'businesses/detail.html', { 'business': business })
+  if business.favourites.filter(id = request.user.id).exists():
+    favourite = True
+  else:
+    favourite = False
+  return render(request, 'businesses/detail.html', { 'business': business, 'favourite' : favourite })
 
 def signup(request):
   error_message = ''
@@ -100,3 +103,21 @@ def category(request):
 def my_profile(request):
   businesses = Business.objects.filter(user=request.user)
   return render(request, 'businesses/profile.html', { 'businesses': businesses})
+
+
+@login_required
+def favourites_add (request, user_id, business_id):
+  Business.objects.get(id=business_id).favourites.add(request.user)
+  return redirect('detail', business_id=business_id)
+
+@login_required
+def favourites_delete (request, user_id, business_id):
+  Business.objects.get(id=business_id).favourites.remove(request.user)
+  return redirect('detail', business_id=business_id)
+
+
+
+@login_required
+def favourite_list (request):
+  businesses = Business.objects.filter(favourites = request.user)
+  return render(request, 'businesses/favourites.html', { 'businesses': businesses})

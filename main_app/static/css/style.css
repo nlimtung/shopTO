@@ -157,7 +157,7 @@ p {
     border-width: 1px;
 }
 
-.details-card a {
+.details-card a, button {
     text-decoration: none;
     font-family: 'Bentham', serif;
     font-size: 20px;
@@ -176,9 +176,14 @@ p {
 .details-card button:hover {
     border-radius: 5px;
     background-color: lightgrey;  
+    cursor: pointer;
+
 }  
 
-.details-card a:hover {
+.details-card a:hover, button:hover {
     color: white;
 }  
 
+.details-card form {
+padding-left: 30px;
+}
