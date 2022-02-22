@@ -69,9 +69,11 @@ def business_index(request):
 
 class BusinessCreate(LoginRequiredMixin, CreateView):
   model = Business
-  fields = '__all__'
+  fields =['name', 'address','city', 'province', 'postal_code', 'website', 'description', 'category', 'image']
   success_url = '/businesses/'
-
+  def form_valid(self, form):
+    form.instance.user = self.request.user  
+    return super().form_valid(form)
 
   
 
