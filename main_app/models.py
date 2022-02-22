@@ -34,3 +34,13 @@ class Business(models.Model):
     def __str__(self):
         return self.name
 
+
+class Product(models.Model):
+    name = models.CharField(max_length = 100)
+    description = models.CharField(max_length=1000)
+    url = models.URLField(max_length = 200)
+
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name

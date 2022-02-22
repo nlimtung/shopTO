@@ -9,7 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 
 
-from .models import Business
+from .models import Business, Product
+from .forms import ProductForm
 from .filter import BusinessFilter
 import uuid
 import boto3
@@ -35,8 +36,13 @@ def businesses_index(request):
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  return render(request, 'businesses/detail.html', { 'business': business })
-
+  product = Product.objects.get(id=business_id)
+  product_form = ProductForm()
+  print('product',product)
+  print('business model',business)
+  print('product form', product_form)
+  return render(request, 'businesses/detail.html', { 
+    'business': business, 'product_form': product_form, 'product': product })
 def signup(request):
   error_message = ''
   if request.method == 'POST':
@@ -97,3 +103,13 @@ def category(request):
 def my_profile(request):
   businesses = Business.objects.filter(user=request.user)
   return render(request, 'businesses/profile.html', { 'businesses': businesses})
+
+
+def add_product(request, business_id):
+  form = ProductForm(request.POST)
+  if form.is_valid():
+    new_product = form.save(commit=False)
+    new_product.business_id = business_id
+    new_product.save()
+  return redirect('detail', business_id=business_id)  
+  

@@ -14,4 +14,5 @@ urlpatterns =  [
     path ('category', views.category, name = 'category'),
     path('businesses/<int:pk>/update', views.BusinessesUpdate.as_view(), name='businesses_update'),
     path('businesses/<int:pk>/delete', views.BusinessesDelete.as_view(), name='businesses_delete'),
+    path('business/<int:business_id>/add_product/', views.add_product, name='add_product'),
 ]
