@@ -22,7 +22,7 @@ nav > h2{
     font-size: 30px;
   }
 
-nav a, .dropdown {
+nav a {
     text-decoration: none;
     margin: auto 35px auto 35px;
     color: white;
@@ -52,7 +52,7 @@ nav a:hover {
     color: black
 }
 
-
+/* index */
 
 .card {
     position: relative;
@@ -64,11 +64,12 @@ nav a:hover {
     height: 400px;
     background-size: cover;
     background-position: center;
+    border-radius: 5px;
 }
+
 .card:hover {
     opacity: 0.8;
     cursor: pointer;
-
 }
 
 .card:hover .card-content {
@@ -85,6 +86,11 @@ nav a:hover {
     width: 300px;
     padding: 0px;
     background-color: #c3c6b1;
+    border-radius: 5px;
+}
+
+.index_form {
+    margin: 20px;
 
 }
 
@@ -128,6 +134,7 @@ p {
   line-height: 30px;
   
 }
+
 
 /* details page */
 .details-card {
@@ -173,17 +180,45 @@ p {
     border-radius: 5px;
 }   
 
-.details-card button:hover {
+.details-card form {
+    padding-left: 30px;
+    }
+
+/* buttons */
+
+button:hover {
     border-radius: 5px;
     background-color: lightgrey;  
     cursor: pointer;
 
 }  
 
-.details-card a:hover, button:hover {
+a:hover, button:hover {
     color: white;
 }  
 
-.details-card form {
-padding-left: 30px;
+
+
+/* add new form */
+
+.createform {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #c3c6b1;
+    padding: 15px;
+    width: 450px;
+    margin:auto;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 20px;
+}
+
+.createform td {
+justify-items: center;
+text-align: center;
+}
+
+#id_image {
+    padding-left: 45px;
 }

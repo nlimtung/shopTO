@@ -2,12 +2,11 @@
 {% block content %}
 
 <h1>business listings</h1>
-
-<form method="GET">
-  {{category_filter.form.as_p}}
-  <button type = 'submit'>search</button>
-</form>
-  
+<div class = 'index_form'>
+  <form method="GET">
+    {{category_filter.form}} <button type = 'submit'>search</button>
+  </form>
+</div>
 {% for category in category_filter.qs %}
 <a href="{% url 'detail' category.id %}">
   <div class="card" style="background-image: url({{category.image.url}});">
