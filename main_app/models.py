@@ -31,7 +31,8 @@ class Business(models.Model):
     )
     image = models.ImageField(upload_to='businesscollector/',default='default.png',null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    favourites = models.ManyToManyField(
+        User, related_name = 'favourite', default=None, blank=True)
     def __str__(self):
         return self.name
 

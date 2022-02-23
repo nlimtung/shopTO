@@ -6,30 +6,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>Document</title>
+   
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
+    
+<link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
+
 
 </head>
 <body>
     <nav>
-        <h2>shoplocalTO</h2>
+        <h2 class = 'base-title'> <a href = '/'>shoplocalTO</a></h2>   
         <a href = '/businesses'>see all</a>
-        <a href = ''>about</a>
         {% if user.is_authenticated %}
-            <a href = "{% url 'businesses_create' %}">add new</a>
-            
-            <!-- <div class="dropdown"> categories
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div> -->
-            <a href ="{% url 'category'%}"> categories</a>
-            <a href = ''> favourites?</a>
+            <a href = "{% url 'businesses_create' %}">submit a </br>business</a>
+            <a href = "{% url 'favourite_list' %}">favourites</a>
             <a href = "{% url 'myprofile' %}"> see your </br>business</a>
             <a href = "{% url 'logout' %}">log out</a>
         {% else %}

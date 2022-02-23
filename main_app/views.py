@@ -1,13 +1,13 @@
 from dataclasses import fields
 from itertools import product
 from pyexpat import model
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 from .models import Business, Product
@@ -20,7 +20,6 @@ BUCKET = 'businesscollector'
 
 
 
-from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 
@@ -33,17 +32,20 @@ def home (request):
 
 def businesses_index(request):
     businesses = Business.objects.all()
-    return render(request, 'businesses/index.html', { 'businesses': businesses })
+    category_filter = BusinessFilter(request.GET, queryset=businesses, )
+
+    return render(request, 'businesses/index.html', { 'businesses': businesses, 'category_filter': category_filter })
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  product = Product.objects.get(id=business_id)
+  product = Product.objects.all()
+  
   product_form = ProductForm()
-  #print('product',product)
-  # print('business model',business)
-  # print('product form', product_form)
-  return render(request, 'businesses/detail.html', { 
-    'business': business, 'product_form': product_form, 'product': product})
+  if business.favourites.filter(id = request.user.id).exists():
+    favourite = True
+  else:
+    favourite = False
+  return render(request, 'businesses/detail.html', { 'business': business, 'favourite' : favourite, 'product_form': product_form, 'product': product})
 
 def signup(request):
   error_message = ''
@@ -64,26 +66,23 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-#Create business
 
-def business_index(request):
-  return render(request, 'business/index.html', { 'business': business })
-
-
-class BusinessCreate(CreateView):
+class BusinessCreate(LoginRequiredMixin, CreateView):
   model = Business
-  fields = '__all__'
+  fields =['name', 'address','city', 'province', 'postal_code', 'website', 'description', 'category', 'image']
   success_url = '/businesses/'
-
+  def form_valid(self, form):
+    form.instance.user = self.request.user  
+    return super().form_valid(form)
 
   
 
-class BusinessesUpdate(UpdateView):
+class BusinessesUpdate(LoginRequiredMixin, UpdateView):
   model = Business 
   fields = ['name', 'website', 'description', 'category']
   success_url = '/businesses/'
 
-class BusinessesDelete(DeleteView):
+class BusinessesDelete(LoginRequiredMixin, DeleteView):
   model = Business
   success_url = '/businesses/'  
 
@@ -102,6 +101,7 @@ def category(request):
 #     # Let the CreateView do its job as usual
 #     return super().form_valid(form)
 
+@login_required
 def my_profile(request):
   businesses = Business.objects.filter(user=request.user)
   return render(request, 'businesses/profile.html', { 'businesses': businesses})
@@ -125,3 +125,19 @@ class delete_product(DeleteView):
   success_url = '/businesses/{business_id}/'
  
   
+@login_required
+def favourites_add (request, user_id, business_id):
+  Business.objects.get(id=business_id).favourites.add(request.user)
+  return redirect('detail', business_id=business_id)
+
+@login_required
+def favourites_delete (request, user_id, business_id):
+  Business.objects.get(id=business_id).favourites.remove(request.user)
+  return redirect('detail', business_id=business_id)
+
+
+
+@login_required
+def favourite_list (request):
+  businesses = Business.objects.filter(favourites = request.user)
+  return render(request, 'businesses/favourites.html', { 'businesses': businesses})
