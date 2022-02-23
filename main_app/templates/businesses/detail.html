@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{ business.name }}</h1></br>
+<h1>business details</h1>
 
-<div class="details-card">
-  <div class="details-image" style="background-image: url({{business.image.url}});"> 
-  </div>
 
-  <div class="details-card-text">
+<div id="flex-grid">
+  
+  <img id="col1" src="{{business.image.url}}" width="500px" height="auto">
+
+  <div id="col2">
+
+    <span class="card-title">{{ business.name }}</span>
+    <p>Address: {{ business.address }}</p>
+    <p>City: {{ business.city }}</p>
+    <p>Provice: {{ business.province }}</p>
+    <p>Postal Code: {{ business.postal_code }}</p>
+    <p>Website: {{ business.website }}</p>
     <p>Category: {{ business.category }}</p>
-    <p>Description:</br>  {{ business.description }}</p>
-    <p>Address:</br> {{ business.address }}</br>
-    {{ business.city }}, {{ business.province }}, {{ business.postal_code }}</p>
-    <p> <button><a href ='{{ business.website }}'>shop website</a> </button></p>
-    <!-- like -->
+    <p>Description: {{ business.description }}</p>
+    
+    
+  <br>
+  
+    <a href="{% url 'businesses_update' business.id %}"><button>Edit</button></a>
+    <a href="{% url 'businesses_delete' business.id %}"><button> Delete My Business</button></a>
+
+  <br>
         {%if favourite%}
         <form action="{% url 'favourites_delete' business.id user.id%}" method="post">
             {% csrf_token %}  
@@ -24,7 +36,7 @@
             Favourited
             </button>
         </form>
-    
+
 
         {%else%}
         <form action="{% url 'favourites_add' business.id user.id%}" method="post">
@@ -33,27 +45,65 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                 </svg> 
-              Add to favourites
+                Add to favourites
             </button>
         </form>
-   
+
         {% endif %}
-  
- 
 
 
 
 
-    {% if business.user == request.user %}
+
+
+        {% if business.user == request.user %}
 
         <div class="card-action">
             <p><button> <a href="{% url 'businesses_update' business.id %}">Edit</a></button>
             <button><a href="{% url 'businesses_delete' business.id %}">Delete Business</a></button></p>
         </div>
         </div>
-    {% else %}
+        {% else %}
         <div></div>
-    {% endif %}
+        {% endif %}
+        </div>
+</div>
 </div>
 
-{% endblock %}
+
+
+<hr>
+<div class="row">
+  <div>
+    <h3>{{ business.name }}'s Products</h3>
+    <br>
+    
+    {% for product in business.product_set.all %}
+    <div class="card">
+      <div class="card-content">
+        <img src="{{product.image.url}}" width=260px> 
+        <span class="card-title">{{ product.name }}</span>
+        <br>
+        <a href="{{ product.url }}">Product Website</a>
+        <p>Description: {{ product.description }}</p>
+        
+        <br>
+        <a href="{% url 'edit_product' product.id %}"><button>Edit</button></a>
+        <a href="{% url 'delete_product' product.id %}"><button>Delete</button></a>
+        
+        
+      </div>
+    </div>
+    {% endfor %}
+    
+  </div>
+  <!-- Available toys will come after this line -->
+  
+  <div id="col3">
+    <form action="{% url 'add_product' business.id %}" method="post">
+      {% csrf_token %}
+      {{ product_form.as_p }}
+      <input type="submit" class="btn" value="Add Product!">
+    </form>
+  </div>
+  {% endblock %}
