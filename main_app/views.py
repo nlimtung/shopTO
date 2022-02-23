@@ -1,4 +1,5 @@
 from dataclasses import fields
+from itertools import product
 from pyexpat import model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -38,11 +39,12 @@ def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
   product = Product.objects.get(id=business_id)
   product_form = ProductForm()
-  print('product',product)
-  print('business model',business)
-  print('product form', product_form)
+  #print('product',product)
+  # print('business model',business)
+  # print('product form', product_form)
   return render(request, 'businesses/detail.html', { 
-    'business': business, 'product_form': product_form, 'product': product })
+    'business': business, 'product_form': product_form, 'product': product})
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
@@ -112,4 +114,14 @@ def add_product(request, business_id):
     new_product.business_id = business_id
     new_product.save()
   return redirect('detail', business_id=business_id)  
+
+class edit_product(UpdateView):
+  model = Product
+  fields =  ['description', 'url']
+  success_url = '/businesses/{business_id}/'
+
+class delete_product(DeleteView):
+  model = Product
+  success_url = '/businesses/{business_id}/'
+ 
   
