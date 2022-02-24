@@ -38,7 +38,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "main_app",
     'django_filters',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,3 +149,4 @@ AWS_STORAGE_BUCKET_NAME =os.environ['AWS_STORAGE_BUCKET_NAME']
 
 AWS_S3_REGION_NAME = "ca-central-1"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
+
