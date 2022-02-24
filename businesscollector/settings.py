@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
+
 
 environ.Env()
 environ.Env.read_env()
@@ -79,17 +81,24 @@ WSGI_APPLICATION = 'businesscollector.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'businesscollector',
-        'USER': os.environ['USER'], #'USER': 'postgres',
-        'PASSWORD': os.environ['PASSWORD'],
-        'HOST': os.environ['HOST'],
-        'PORT': os.environ['PORT'],
+if os.environ["DJANGO_ENV"]=="dev":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'businesscollector',
+            'USER': os.environ['USER'], #'USER': 'postgres',
+            'PASSWORD': os.environ['PASSWORD'],
+            'HOST': os.environ['HOST'],
+            'PORT': os.environ['PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'businesscollector',
+        }
+    }
 
 
 # Password validation
@@ -150,3 +159,5 @@ AWS_STORAGE_BUCKET_NAME =os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_REGION_NAME = "ca-central-1"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
