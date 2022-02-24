@@ -150,3 +150,6 @@ AWS_STORAGE_BUCKET_NAME =os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_REGION_NAME = "ca-central-1"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
