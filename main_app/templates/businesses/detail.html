@@ -21,10 +21,6 @@
     
     
   <br>
-  
-    <a href="{% url 'businesses_update' business.id %}"><button>Edit</button></a>
-    <a href="{% url 'businesses_delete' business.id %}"><button> Delete My Business</button></a>
-
   <br>
         {%if favourite%}
         <form action="{% url 'favourites_delete' business.id user.id%}" method="post">
@@ -88,9 +84,11 @@
         <p>Description: {{ product.description }}</p>
         
         <br>
+        {% if business.user == request.user %}
+
         <a href="{% url 'edit_product' product.id %}"><button>Edit</button></a>
         <a href="{% url 'delete_product' product.id %}"><button>Delete</button></a>
-        
+        {%endif%}
         
       </div>
     </div>
@@ -100,7 +98,7 @@
   <!-- Available toys will come after this line -->
   
   <div id="col3">
-    <form action="{% url 'add_product' business.id %}" method="post">
+    <form action="{% url 'add_product' business.id %}" method="post"enctype="multipart/form-data">
       {% csrf_token %}
       {{ product_form.as_p }}
       <input type="submit" class="btn" value="Add Product!">
