@@ -38,7 +38,7 @@ def businesses_index(request):
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  product = Product.objects.all()
+  product = Product.objects.get(id=business_id)
   
   product_form = ProductForm()
   if business.favourites.filter(id = request.user.id).exists():
