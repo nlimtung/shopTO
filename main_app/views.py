@@ -38,7 +38,7 @@ def businesses_index(request):
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  product = Product.objects.all()
+  product = Product.objects.get(id=business_id)
   
   product_form = ProductForm()
   if business.favourites.filter(id = request.user.id).exists():
@@ -86,41 +86,28 @@ class BusinessesDelete(LoginRequiredMixin, DeleteView):
   model = Business
   success_url = '/businesses/'  
 
-def category(request):
-    businesses = Business.objects.all()
-    category_filter = BusinessFilter(request.GET, queryset=businesses)
-    
-    return render(request, 'category.html', {'businesses': businesses, 'category_filter': category_filter})
 
-  
-#   # This inherited method is called when a
-#   # valid cat form is being submitted
-#   def form_valid(self, form):
-#     # Assign the logged in user (self.request.user)
-#     form.instance.user = self.request.user  # form.instance is the cat
-#     # Let the CreateView do its job as usual
-#     return super().form_valid(form)
 
 @login_required
 def my_profile(request):
   businesses = Business.objects.filter(user=request.user)
   return render(request, 'businesses/profile.html', { 'businesses': businesses})
 
-
+@login_required
 def add_product(request, business_id):
-  form = ProductForm(request.POST)
+  form = ProductForm(request.POST, request.FILES)
   if form.is_valid():
     new_product = form.save(commit=False)
     new_product.business_id = business_id
     new_product.save()
   return redirect('detail', business_id=business_id)  
 
-class edit_product(UpdateView):
+class edit_product(LoginRequiredMixin, UpdateView):
   model = Product
   fields =  ['description', 'url']
   success_url = '/businesses/{business_id}/'
 
-class delete_product(DeleteView):
+class delete_product(LoginRequiredMixin, DeleteView):
   model = Product
   success_url = '/businesses/{business_id}/'
  
