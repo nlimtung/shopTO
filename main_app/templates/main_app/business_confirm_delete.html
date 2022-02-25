@@ -7,7 +7,7 @@
   <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
 
   <form action="" method="POST">
-    {% csrf_tgit oken %}
+    {% csrf_token %}
     <input type="submit" value="Yes - Delete My Business!" class="btn">
     <a href="{% url 'detail' business.id %}"><button class="btn">Cancel</button></a>
   </form>

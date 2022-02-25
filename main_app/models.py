@@ -35,6 +35,8 @@ class Business(models.Model):
         User, related_name = 'favourite', default=None, blank=True)
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'business_id': self.id})
 
 
 class Product(models.Model):
