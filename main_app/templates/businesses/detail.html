@@ -55,6 +55,7 @@
         {% endif %}
         </div>
 </div>
+</br>
 </div>
 
 
@@ -67,9 +68,7 @@
     
     {% for product in business.product_set.all %}
     <div class="product-card">
-      <div class="card-content">
-        
-        <img src="{{product.image.url}}"> 
+        <img src="{{product.image.url}}" > 
         <span class="card-title">{{ product.name }}</span>
         <br>
         <a href="{{ product.url }}">Product Website</a>
@@ -81,14 +80,13 @@
         <a href="{% url 'delete_product' product.id %}"><button>Delete</button></a>
         {%endif%}
         
-      </div>
     </div>
     {% endfor %}
 
     
   </div>
-{% if business.user == request.user %}
 
+{% if business.user == request.user %}
   <hr>
   <div class = 'add-new-product-form'>
     <h3>add a product</h3>
