@@ -31,15 +31,14 @@ def home (request):
     return render (request, 'home.html')
 
 def businesses_index(request):
-    businesses = Business.objects.all()
+    businesses = Business.objects.order_by('name')
     category_filter = BusinessFilter(request.GET, queryset=businesses, )
 
     return render(request, 'businesses/index.html', { 'businesses': businesses, 'category_filter': category_filter })
 
 def businesses_detail(request, business_id):
   business = Business.objects.get(id=business_id)
-  product = Product.objects.get(id=business_id)
-  
+  product = Product.objects.all()  
   product_form = ProductForm()
   if business.favourites.filter(id = request.user.id).exists():
     favourite = True
@@ -70,7 +69,6 @@ def signup(request):
 class BusinessCreate(LoginRequiredMixin, CreateView):
   model = Business
   fields =['name', 'address','city', 'province', 'postal_code', 'website', 'description', 'category', 'image']
-  success_url = '/businesses/'
   def form_valid(self, form):
     form.instance.user = self.request.user  
     return super().form_valid(form)
@@ -80,7 +78,6 @@ class BusinessCreate(LoginRequiredMixin, CreateView):
 class BusinessesUpdate(LoginRequiredMixin, UpdateView):
   model = Business 
   fields = ['name', 'website', 'description', 'category']
-  success_url = '/businesses/'
 
 class BusinessesDelete(LoginRequiredMixin, DeleteView):
   model = Business
