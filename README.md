@@ -6,6 +6,15 @@ As small businesses are forced to move online in order to survive, there is a ri
 
 <br>
 
+## Team Members
+
+- Nicole
+- Maha
+- Ashu
+
+<br>
+
+
 ## Getting started
 
 [Click here to open the website (opens on current page)](https://shoplocalTO.herokuapp.com/)
@@ -33,18 +42,18 @@ Logged in users can also create a favourites list where they can save all the co
 <br>
 
 ## Technologies used
-- Django/Python, Javascript, CSS, HTML, PostgreSQL, AWS (for hosting images)
+- Django/Python, Javascript, CSS, HTML, PostgreSQL, AWS (for hosting images), Heroku (for deployment)
 
 <br>
 
 ## Planned future enhancements
 
-Implement the ability for users to make comments businesses and directly message them.
+Implement the ability for users to make comments on businesses and their products, and for private messaging between businesses and customers.
 
 ## Wireframe, project planning board, and ERD
 
 
-1. Wireframes 
+1. ### Wireframes 
 
     (a) unlogged in user landing page
     ![](https://i.imgur.com/YmU0JER.png)
@@ -52,11 +61,10 @@ Implement the ability for users to make comments businesses and directly message
     (b) logged in user viewing a business page
     ![](https://i.imgur.com/WCUNFDN.png)
 
-2. ERD
-![](https://i.imgur.com/9YIDlxj.png)
+2. ### ERD
+![](https://i.imgur.com/CV2xZDv.png)
 
-2. Project planning board - Trello
-![](https://i.imgur.com/QaCIqe9.png)
+3. ### [Project planning board - Trello](https://trello.com/b/zCL58Gnc/project-management)
 
 
 <br>
